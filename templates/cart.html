@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="container mt-5">
+
+<h2>Your Cart</h2>
+
+<table class="table table-bordered">
+
+<tr>
+    <th>Image</th>
+    <th>Product</th>
+    <th>Price</th>
+    <th>Quantity</th>
+    <th>Total</th>
+    <th>Action</th>
+</tr>
+
+{% for item in cart_items %}
+
+<tr>
+
+<td>
+<img src="{{ item.product.image.url }}"
+     width="80"
+     height="80">
+</td>
+
+<td>{{ item.product.name }}</td>
+
+<td>₹{{ item.product.price }}</td>
+
+{% comment  %}<td>{{ item.quantity }}</td>{% endcomment %}
+<td>
+
+    <a href="{% url 'decrease_quantity' item.id %}"
+       class="btn btn-danger btn-sm">
+        -
+    </a>
+
+    <span class="mx-2">{{ item.quantity }}</span>
+
+    <a href="{% url 'increase_quantity' item.id %}"
+       class="btn btn-success btn-sm">
+        +
+    </a>
+
+</td>
+
+<td>₹{{ item.total_price }}</td>
+
+<td>
+    <a href="{% url 'remove_from_cart' item.id %}"
+       class="btn btn-danger btn-sm">
+        Remove
+    </a>
+</td>
+
+</tr>
+
+{% empty %}
+
+<tr>
+<td colspan="5">Your cart is empty.</td>
+
+
+</tr>
+
+
+
+{% endfor %}
+
+</table>
+
+<h4 class="text-end">
+Grand Total : ₹{{ total }}
+</h4>
+
+</div>
+
+{% endblock %}

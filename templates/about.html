@@ -1,0 +1,195 @@
+{% extends 'base.html' %}
+
+{% block title %}About{% endblock title %}
+
+
+{% block body %}
+
+<section class="py-5 bg-light">
+    <div class="container">
+
+        <!-- Heading -->
+        <div class="text-center mb-5">
+            <h1 class="fw-bold">About Us</h1>
+            <p class="text-muted">
+                Serving happiness with every scoop since our beginning.
+            </p>
+        </div>
+
+        <!-- About Section -->
+        <div class="row align-items-center mb-5">
+
+            <div class="col-lg-6">
+                <img src="/static/img/icecream.jpg" class="img-fluid rounded shadow" alt="Ice Cream">
+            </div>
+
+            <div class="col-lg-6">
+                <h2 class="fw-bold mb-3">Welcome to Suru Ice Cream</h2>
+
+                <p class="text-muted">
+                    We are passionate about creating delicious and high-quality
+                    ice creams made from fresh ingredients. Our goal is to make
+                    every customer smile with every scoop they enjoy.
+                </p>
+
+                <p class="text-muted">
+                    From classic vanilla to exciting new flavors, we have
+                    something for everyone. Quality, freshness, and customer
+                    satisfaction are always our top priorities.
+                </p>
+
+                <a href="{% url 'services' %}" class="btn btn-primary mt-3">
+                    Explore Our Flavors
+                </a>
+
+            </div>
+
+        </div>
+
+        <!-- Why Choose Us -->
+
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Why Choose Us?</h2>
+        </div>
+
+        <div class="row text-center">
+
+            <div class="col-md-4 mb-4">
+                <div class="card shadow h-100">
+                    <div class="card-body">
+                        <h3>🍦</h3>
+                        <h5>Fresh Ingredients</h5>
+                        <p>
+                            We use fresh milk, fruits, and premium ingredients
+                            to prepare every ice cream.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="card shadow h-100">
+                    <div class="card-body">
+                        <h3>❤️</h3>
+                        <h5>Made with Love</h5>
+                        <p>
+                            Every scoop is prepared with care to give you the
+                            best taste and experience.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="card shadow h-100">
+                    <div class="card-body">
+                        <h3>😊</h3>
+                        <h5>Happy Customers</h5>
+                        <p>
+                            Thousands of customers trust us for quality,
+                            freshness, and delicious flavors.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Statistics -->
+
+        <div class="row text-center mt-5">
+
+            <div class="col-md-3">
+                <h2 class="text-primary">25+</h2>
+                <p>Ice Cream Flavors</p>
+            </div>
+
+            <div class="col-md-3">
+                <h2 class="text-primary">5000+</h2>
+                <p>Happy Customers</p>
+            </div>
+
+            <div class="col-md-3">
+                <h2 class="text-primary">10+</h2>
+                <p>Years Experience</p>
+            </div>
+
+            <div class="col-md-3">
+                <h2 class="text-primary">100%</h2>
+                <p>Fresh Quality</p>
+            </div>
+
+        </div>
+
+        <!-- Team -->
+
+        <div class="mt-5">
+
+            <h2 class="text-center fw-bold mb-4">
+                Meet Our Team
+            </h2>
+
+            <div class="row">
+
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow text-center">
+                        <img src="/static/img/chocobar1.jpg" class="card-img-top" alt="">
+                        <div class="card-body">
+                            <h5>Founder</h5>
+                            <p class="text-muted">
+                                Passionate about creating premium ice creams.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow text-center">
+                        <img src="/static/img/chocobar1.jpg" class="card-img-top" alt="">
+                        <div class="card-body">
+                            <h5>Head Chef</h5>
+                            <p class="text-muted">
+                                Expert in making delicious and unique flavors.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow text-center">
+                        <img src="/static/img/chocobar1.jpg" class="card-img-top" alt="">
+                        <div class="card-body">
+                            <h5>Customer Support</h5>
+                            <p class="text-muted">
+                                Always ready to make your experience amazing.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Call To Action -->
+
+        <div class="text-center mt-5">
+
+            <h2 class="fw-bold">
+                Ready for Your Favorite Scoop?
+            </h2>
+
+            <p class="text-muted">
+                Visit us today and enjoy our delicious range of ice creams.
+            </p>
+
+            <a href="/contact" class="btn btn-success btn-lg">
+                Contact Us
+            </a>
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock body %}

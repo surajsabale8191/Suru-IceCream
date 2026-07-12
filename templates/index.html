@@ -1,0 +1,109 @@
+{% extends "base.html" %} {%block title%}Home{%endblock title%} {% block body %}
+<div class="container-fluid my-4 px-0">
+  <div id="carouselExampleIndicators" class="carousel slide">
+    <div class="carousel-indicators">
+      <button
+        type="button"
+        data-bs-target="#carouselExampleIndicators"
+        data-bs-slide-to="0"
+        class="active"
+        aria-current="true"
+        aria-label="Slide 1"
+      ></button>
+      <button
+        type="button"
+        data-bs-target="#carouselExampleIndicators"
+        data-bs-slide-to="1"
+        aria-label="Slide 2"
+      ></button>
+      <button
+        type="button"
+        data-bs-target="#carouselExampleIndicators"
+        data-bs-slide-to="2"
+        aria-label="Slide 3"
+      ></button>
+    </div>
+
+
+   <div class="carousel-inner">
+    <div class="carousel-item active">
+        <img src="/static/img/1.jpg"
+             class="d-block w-100"
+             style="height: 400px; width:100%; "
+             alt="...">
+    </div>
+
+    <div class="carousel-item">
+        <img src="/static/img/icecream.jpg"
+             class="d-block w-100"
+             style="height: 400px; "
+             alt="...">
+    </div>
+
+    <div class="carousel-item">
+        <img src="/static/img/icecream3.jpg"
+             class="d-block w-100"
+             style="height: 400px; "
+             alt="...">
+    </div>
+</div>
+    <button
+      class="carousel-control-prev"
+      type="button"
+      data-bs-target="#carouselExampleIndicators"
+      data-bs-slide="prev"
+    >
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button
+      class="carousel-control-next"
+      type="button"
+      data-bs-target="#carouselExampleIndicators"
+      data-bs-slide="next"
+    >
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</div>
+
+<div class="container-fluid p-0">
+    <div class="row g-0" style="min-height:85vh;">
+
+        <!-- Left Side -->
+        <div class="d-flex flex-column justify-content-center"
+             style="background:#d9eef7; padding:70px;">
+
+            <p style="font-size:22px; color:#082b66; margin-bottom:20px;">
+                The best ice cream brands
+            </p>
+
+            <h1 style="font-size:4rem;
+                       font-weight:700;
+                       color:#082b66;
+                       line-height:1.1;
+                       margin-bottom:40px;">
+                All your faves,<br>
+                all in one place.
+            </h1>
+
+           <a href="/products" class="btn btn-success btn-lg style= width=30%">
+                Get a Scoop!
+            </a>
+            <div class="my-5 ">
+              <img src="/static/img/mix.jpg"
+             class="d-block w-50"
+             style="height: 400px; "
+             alt="mix">
+            </div>
+
+        </div>
+
+      
+
+    </div>
+</div>
+
+
+{% endblock body%}

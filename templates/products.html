@@ -1,0 +1,21 @@
+{% extends "base.html" %} {%block title%}Home{%endblock title%} {% block body %}
+<div class="row">
+    {% for product in products %}
+    <div class="col-md-4">
+        <div class="card">
+            <img src="{{ product.image.url }}" class="card-img-top">
+
+            <div class="card-body">
+                <h5>{{ product.name }}</h5>
+                <p>₹{{ product.price }}</p>
+
+               <a href="{% url 'add_to_cart' product.id %}" class="btn btn-primary">
+                    Add to Cart
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock body%}
