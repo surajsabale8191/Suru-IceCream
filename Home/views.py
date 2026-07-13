@@ -1,9 +1,12 @@
+from django.contrib.auth.models import User
 from django.shortcuts import render,HttpResponse, redirect,  get_object_or_404
 from datetime import datetime
-from Home.models import Contact, Registration, Product, Cart
+from Home.models import Contact, Product, Cart
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+
+
 
 # Create your views here.
 def index (request):
@@ -34,38 +37,46 @@ def contact(request):
     return render(request, "contact.html")
     #return HttpResponse(" THis is contact page")
 
+
 def registration(request):
-    if request.method=="POST":
-        name=request.POST.get('name')
-        email=request.POST.get('email')
-        password=request.POST.get('password')
-        
-        registration=Registration(name=name, email=email, password=password, date=datetime.today())
-        registration.save()
-        messages.success(request, "Registration Successfull")
+    if request.method == "POST":
+        name = request.POST.get("name")
+        email = request.POST.get("email")
+        password = request.POST.get("password")
+
+        if User.objects.filter(username=email).exists():
+            messages.error(request, "Email already registered.")
+            return redirect("registration")
+
+        User.objects.create_user(
+            username=email,
+            email=email,
+            password=password,
+            first_name=name
+        )
+
+        messages.success(request, "Registration successful! Please login.")
+        return redirect("login")
 
     return render(request, "registration.html")
 
 
-
 def user_login(request):
     if request.method == "POST":
-        email = request.POST["email"]
-        password = request.POST["password"]
+        email = request.POST.get("email")
+        password = request.POST.get("password")
 
-        try:
-            user = Registration.objects.get(
-                email=email,
-                password=password
-            )
+        user = authenticate(
+            request,
+            username=email,
+            password=password
+        )
 
-            request.session["user_id"] = user.id
+        if user is not None:
+            login(request, user)
             return redirect("home")
-
-        except Registration.DoesNotExist:
-            return render(request, "login.html", {
-                "error": "Invalid email or password"
-            })
+        else:
+            messages.error(request, "Invalid email or password")
 
     return render(request, "login.html")
 
@@ -76,9 +87,10 @@ def products(request):
         'products': products
     })
 
-@login_required
-def add_to_cart(request, product_id):
-    product = get_object_or_404(Product, id=product_id)
+@login_required(login_url='login')
+def add_to_cart(request, icecream_id):
+
+    product = get_object_or_404(Product, id=icecream_id)
 
     cart_item, created = Cart.objects.get_or_create(
         user=request.user,
@@ -89,7 +101,8 @@ def add_to_cart(request, product_id):
         cart_item.quantity += 1
         cart_item.save()
 
-    return redirect('products')
+    return redirect("cart")
+
 
 @login_required
 def cart(request):
@@ -102,9 +115,7 @@ def cart(request):
         "total": total
     })
 
-from django.shortcuts import get_object_or_404, redirect
-from django.contrib.auth.decorators import login_required
-from .models import Cart
+
 
 @login_required
 def increase_quantity(request, cart_id):
@@ -147,5 +158,11 @@ def remove_from_cart(request, cart_id):
     cart_item.delete()
 
     return redirect('cart')
+
+
+
+def user_logout(request):
+    logout(request)
+    return redirect("login")
 
         

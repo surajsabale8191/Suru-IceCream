@@ -15,7 +15,7 @@ urlpatterns = [
     path("login", views.user_login, name='login'),
     path("cart", views.cart, name='cart'),
     path('products/', views.products, name='products'),
-    path('add-to-cart/<int:product_id>/', views.add_to_cart, name='add_to_cart'),
+    path('add-to-cart/<int:icecream_id>/', views.add_to_cart, name='add_to_cart'),
     path(
     'increase/<int:cart_id>/',
     views.increase_quantity,
@@ -28,7 +28,7 @@ urlpatterns = [
     'remove/<int:cart_id>/',
     views.remove_from_cart,
     name='remove_from_cart'),
-    
+    path("logout/", views.user_logout, name="logout"),
 
 
 ]
