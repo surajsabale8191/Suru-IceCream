@@ -1,30 +1,56 @@
-
-
-{% block title %}Login{% endblock title %}
+{% block title %}{% endblock title %}
 
 {% block body %}
 
-<h2>Login</h2>
+<div style="width:400px; margin:80px auto; padding:30px; border:1px solid #ddd; border-radius:10px; box-shadow:0px 0px 15px rgba(0,0,0,0.2); background-color:white;">
 
-{% if error %}
-<p style="color:red;">{{ error }}</p>
-{% endif %}
+    <h2 style="text-align:center; color:#007bff; margin-bottom:25px;">
+        Login
+    </h2>
 
-<form method="POST">
-    {% csrf_token %}
+    {% if error %}
+        <p style="color:red; text-align:center; font-weight:bold;">
+            {{ error }}
+        </p>
+    {% endif %}
 
-    <label>Email</label><br>
-    <input type="text" name="email" required><br><br>
+    <form method="POST">
+        {% csrf_token %}
 
-    <label>Password</label><br>
-    <input type="password" name="password" required><br><br>
+        <label style="font-weight:bold;">Email</label><br>
 
-    <button type="submit" href="/index">Login</button>
-</form>
+        <input
+            type="email"
+            name="email"
+            required
+            style="width:100%; padding:10px; margin-top:8px; margin-bottom:20px; border:1px solid #ccc; border-radius:5px;"
+        >
 
-<p>
-    Don't have an account?
-    <a href="{% url 'registration' %}">Sign Up</a>
-</p>
+        <label style="font-weight:bold;">Password</label><br>
+
+        <input
+            type="password"
+            name="password"
+            required
+            style="width:100%; padding:10px; margin-top:8px; margin-bottom:25px; border:1px solid #ccc; border-radius:5px;"
+        >
+
+        <button
+            type="submit"
+            style="width:100%; padding:12px; background-color:#007bff; color:white; border:none; border-radius:5px; font-size:16px; cursor:pointer;"
+        >
+            Login
+        </button>
+
+        <p style="text-align:center; margin-top:20px;">
+            Don't have an account?
+            <a href="{% url 'registration' %}" style="color:#007bff; text-decoration:none;">
+                Register
+            </a>
+        </p>
+
+    </form>
+
+</div>
 
 {% endblock body %}

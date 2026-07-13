@@ -55,7 +55,7 @@ def registration(request):
             first_name=name
         )
 
-        messages.success(request, "Registration successful! Please login.")
+        messages.success(request, "Registration successful!")
         return redirect("login")
 
     return render(request, "registration.html")
@@ -165,4 +165,23 @@ def user_logout(request):
     logout(request)
     return redirect("login")
 
-        
+
+@login_required
+def checkout(request):
+    cart_items = Cart.objects.filter(user=request.user)
+
+    total = sum(item.total_price for item in cart_items)
+
+    return render(request, "checkout.html", {
+        "cart_items": cart_items,
+        "total": total
+    })       
+
+@login_required
+def payment(request):
+    cart_items = Cart.objects.filter(user=request.user)
+    total = sum(item.total_price for item in cart_items)
+
+    return render(request, "payment.html", {
+        "total": total
+    })
