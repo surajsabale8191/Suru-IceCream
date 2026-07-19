@@ -3,18 +3,27 @@ from django.urls import path
 from Home import views
 from django.conf import settings
 from django.conf.urls.static import static
+from .views import ContactAPIView
+# from .views import (
+#     ProductListCreateAPIView,
+#     ProductRetrieveUpdateDestroyAPIView
+# )
 
 urlpatterns = [
     
     path("", views.user_login, name='login'),
     path("home", views.index, name='home'),
-    path("about", views.about, name='about'),
-    path("services", views.services, name='services'),
-    path("contact", views.contact, name='contact'),
+    path("about/", views.about, name='about'),
+    path("services/", views.services, name='services'),
+    path("contact/", views.contact, name='contact'),
+    path("api/contact/", ContactAPIView.as_view(), name="contact-api"),
     path("registration", views.registration, name='registration'),
     path("login", views.user_login, name='login'),
     path("cart", views.cart, name='cart'),
     path('products/', views.products, name='products'),
+    #path("api/products/", ProductListCreateAPIView.as_view(), name="product-list"),
+    #path("api/products/<int:pk>/", ProductRetrieveUpdateDestroyAPIView.as_view(), name="product-detail"),
+
     path('add-to-cart/<int:icecream_id>/', views.add_to_cart, name='add_to_cart'),
     path(
     'increase/<int:cart_id>/',

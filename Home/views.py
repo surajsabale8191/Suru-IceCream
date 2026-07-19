@@ -5,6 +5,14 @@ from Home.models import Contact, Product, Cart
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+# from .serializers import ProductSerializer
+# from rest_framework import generics
+from rest_framework import status
+from .serializers import ContactSerializer
+from rest_framework.views import APIView
+from django.utils.decorators import method_decorator
 
 
 
@@ -24,19 +32,39 @@ def services(request):
     return render(request, "services.html")
     #return HttpResponse(" THis is services page")
 
+# def contact(request):
+#     if request.method=="POST":
+#         name=request.POST.get('name')
+#         email=request.POST.get('email')
+#         phone=request.POST.get('phone')
+#         desc=request.POST.get('desc')
+#         contact=Contact(name=name, email=email, phone=phone,desc=desc, date=datetime.today())
+#         contact.save()
+#         messages.success(request, "Your message has been sent.")
+
+#     return render(request, "contact.html")
+#     #return HttpResponse(" THis is contact page")
 def contact(request):
-    if request.method=="POST":
-        name=request.POST.get('name')
-        email=request.POST.get('email')
-        phone=request.POST.get('phone')
-        desc=request.POST.get('desc')
-        contact=Contact(name=name, email=email, phone=phone,desc=desc, date=datetime.today())
-        contact.save()
-        messages.success(request, "Your message has been sent.")
-
     return render(request, "contact.html")
-    #return HttpResponse(" THis is contact page")
 
+class ContactAPIView(APIView):
+
+    def post(self, request):
+
+        serializer = ContactSerializer(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(
+                {
+                    "status":True,
+                    "message": "Contact submitted successfully",
+                    "data": serializer.data
+                },
+                status=status.HTTP_201_CREATED
+            )
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 def registration(request):
     if request.method == "POST":
@@ -86,6 +114,15 @@ def products(request):
     return render(request, 'products.html', {
         'products': products
     })
+# class ProductListCreateAPIView(generics.ListCreateAPIView):
+#     queryset = Product.objects.all()
+#     serializer_class = ProductSerializer
+
+
+# class ProductRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = Product.objects.all()
+#     serializer_class = ProductSerializer
+
 
 @login_required(login_url='login')
 def add_to_cart(request, icecream_id):
